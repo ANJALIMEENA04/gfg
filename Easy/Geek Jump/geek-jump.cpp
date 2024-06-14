@@ -6,25 +6,18 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    int  mini(int ind,vector<int>& h,vector<int>& dp){
-        if(ind==0) return 0;
-        if(dp[ind]!=-1)
-            return dp[ind];
-        
-        int twojump=INT_MAX;
-        int onejump=mini(ind-1,h,dp)+abs(h[ind]-h[ind-1]);
-        if(ind>1) 
-            twojump=mini(ind-2,h,dp)+abs(h[ind]-h[ind-2]);
-        return dp[ind]=min(onejump,twojump);
-        
-        
-    }
-    int minimumEnergy(vector<int>& height, int n) {
+    int minimumEnergy(vector<int>& h, int n) {
         // Code here
-        vector<int> dp(n,-1);
-        return mini(n-1,height,dp);
-        
-        
+        // vector<int> dp(n,0);
+        int a=0,b=0;//c,fs,ss;
+        for(int i=1;i<n;i++){
+            int fs=b+abs(h[i-1]-h[i]),ss=INT_MAX;
+            if(i>1)
+                ss=a+abs(h[i-2]-h[i]);
+            a=b;
+            b=min(fs,ss);
+        }
+        return b;
     }
 };
 
