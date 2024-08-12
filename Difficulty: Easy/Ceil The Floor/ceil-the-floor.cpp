@@ -12,14 +12,30 @@ class Solution {
   public:
     vector<int> getFloorAndCeil(int x, vector<int> &arr) {
         // code here
+        sort(arr.begin(),arr.end());
         int n=arr.size();
-        int l=0,h=n-1,flor=-1,ceel=1e6+1;
-        for(auto a:arr){
-            if(a>flor && a<=x) flor=a;
-            if(a<ceel && a>=x) ceel=a;
+        int l=0,h=n-1;
+        vector<int> ans(2,-1);
+        while(l<=h){
+            int m=l+(h-l)/2;
+            if(arr[m]>=x) {
+                h=m-1;
+                ans[1]=m;
+            }
+            else l=m+1;
         }
-        if(ceel==1e6+1) ceel=-1;
-        return {flor,ceel};
+        l=0,h=n-1;
+        while(l<=h){
+            int m=l+(h-l)/2;
+            if(arr[m]<=x){
+                ans[0]=m;
+                l=m+1;
+            }
+            else h=m-1;
+        }
+        if(ans[0]!=-1) ans[0]=arr[ans[0]];
+        if(ans[1]!=-1) ans[1]=arr[ans[1]];
+        return ans;
     }
 };
 
