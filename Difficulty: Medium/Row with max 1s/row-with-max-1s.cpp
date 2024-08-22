@@ -10,19 +10,16 @@ class Solution {
     int rowWithMax1s(vector<vector<int> > &arr) {
         // code here
         int n=arr.size(),m=arr[0].size();
-        // cout<<n<<m;
-        int i=0,j=m-1;
-        int cnt=-1;
-        while(i!=n && j>=0 ){
+        int i=0,j=m-1,ans=-1;
+        while(i<n && j>=0){
             if(arr[i][j]){
+                ans=i;
                 j--;
-                cnt=i;
-                
             }
             else i++;
         }
-        // if(!cnt) return -1;
-        return cnt;
+        // if(j==m-1) return ans;
+        return ans;
     }
 };
 
