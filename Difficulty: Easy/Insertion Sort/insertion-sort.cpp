@@ -17,26 +17,26 @@ void printArray(int arr[], int size)
 class Solution
 {
     public:
-    void insert(int arr[], int i,int n)
+    void insert(int arr[], int n)
     {
         //code here
-        for(int j=1;j<n;j++){
-            int curr=arr[j];
-            int prev=j-1;
-            while(prev>=0 && arr[prev]>curr){
-                arr[prev+1]=arr[prev];
-                prev--;
+        for(int i=n-1;i>=0;i--){
+            if(arr[i]>arr[1+i]){
+                int temp=arr[i];
+                arr[i]=arr[i+1];
+                arr[i+1]=temp;
             }
-            arr[prev+1]=curr;
+            else break;
         }
+        
     }
      public:
     //Function to sort the array using insertion sort algorithm.
     void insertionSort(int arr[], int n)
     {
         //code here
-        for(int i=0;i<n;i++){
-            insert(arr,i,n);
+        for(int i=1;i<n;i++){
+            insert(arr,i);
         }
     }
 };
